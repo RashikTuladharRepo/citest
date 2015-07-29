@@ -1,0 +1,47 @@
+#<ifModule mod_rewrite.c>
+#RewriteEngine On
+#
+#RewriteBase /codeigniternew/
+##if project is in server root then should be: RewriteBase /
+##if project is inn folder then it should be: RewriteBase /folder_name/
+#
+#
+#RewriteCond %(REQUEST_URI)*system.*
+#RewriteRule ^(.*)$ /index.php?$1 [L]
+#
+#
+#RewriteCond %(REQUEST_URI)*application.*
+#RewriteRule ^(.*)$ /index.php?$1 [L]
+#
+#RewriteCond %(REQUEST_FILENAME)!-f
+#RewriteCond %(REQUEST_FILENAME)!-d
+#RewriteRule ^(.*)$ index.php?/$1 [L]
+#</ifModule>
+#<ifModule !mod_rewrite.c>
+#ErrorDocument 404 /index.php
+#</ifModule>
+
+
+
+#2.0
+#Options +FollowSymLinks
+#  RewriteEngine on
+#
+#  # Send request via index.php
+#  RewriteCond %{REQUEST_FILENAME} !-f
+#  RewriteCond %{REQUEST_FILENAME} !-d
+#  RewriteRule ^(.*)$ index.php?/$1 [L]
+
+
+
+
+#
+#RewriteEngine on
+#    RewriteCond %{REQUEST_FILENAME} !-f
+#    RewriteCond %{REQUEST_FILENAME} !-d
+#    RewriteRule .* index.php/$0 [PT,L]
+
+
+#RewriteEngine on
+#RewriteCond $1 !^(index\.php|images|robots\.txt)
+#RewriteRule ^(.*)$ /index.php/$1 [L]
