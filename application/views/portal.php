@@ -66,7 +66,7 @@
 </div>
 <div class="container text-center">
     <?php
-        $this->load->view('footer');
+        $this->load->view('includes/footer');
     ?>
 </div>
 </body>

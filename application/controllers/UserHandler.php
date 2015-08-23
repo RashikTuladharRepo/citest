@@ -28,7 +28,7 @@ class UserHandler extends CI_Controller{
         }
     }
 
-    function check_database($password)
+    public function check_database($password)
     {
         //Field validation succeeded.  Validate against database
         $username = $this->input->post('username');
@@ -36,14 +36,15 @@ class UserHandler extends CI_Controller{
         //query the database
         $result = $this->HandleUsers->login($username, $password);
 
-        if($result)
+        if ($result)
         {
-            $sess_array = array();
             foreach($result as $row)
             {
                 $sess_array = array(
                     'id' => $row->id,
-                    'username' => $row->username
+                    'username' => $row->username,
+                    'fullname' => $row->fullName,
+                    'college'  => $row->college
                 );
                 $this->session->set_userdata('logged_in', $sess_array);
             }
@@ -56,9 +57,7 @@ class UserHandler extends CI_Controller{
         }
     }
 
-
-
-    function redirectUsers()
+    public function redirectUsers()
     {
         if($this->session->userdata('logged_in'))
         {
@@ -68,6 +67,7 @@ class UserHandler extends CI_Controller{
         }
         else
         {
+            $data="Please Login To Continue!";
             //If no session, redirect to login page
             redirect('Portal', 'refresh');
         }

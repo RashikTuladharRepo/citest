@@ -1,0 +1,103 @@
+@font-face {
+    font-family: dancing-script;
+    src: url('../fonts/DancingScript-Regular.otf');
+}
+
+.font16
+{
+    font-size: 16px;
+}
+
+.nav_menu
+{
+    -webkit-box-shadow: -1px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: -1px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+.fixed-values
+{
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.dancing-script
+{
+    font-family: dancing-script;
+}
+
+.notes-section,.profile-section
+{
+    margin-top: 20px;
+}
+
+
+.notes-section h3,.profile-section h3
+{
+    font-family: dancing-script;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    height: 70px;
+}
+
+.notes
+{
+    padding: 10px;
+    width: 250px;
+    height: 300px;
+    background: rgba(0,0,0,0.1);
+    -webkit-transition: background 1s,border-radius 1s;
+    -moz-transition:background 1s,border-radius 1s;
+    margin:10px;
+    -webkit-box-shadow: -1px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: -1px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+.notes:hover
+{
+    background: rgba(0,0,0,0.2);
+    border-radius: 50px 0px 50px 0px;
+}
+
+.notes a
+{
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.doc-type
+{
+
+}
+
+.doc-type img
+{
+    height:200px;
+    width:200px;
+    padding:10px;
+    margin-left: 10px;
+}
+
+.doc-description
+{
+    font-size: 18px;
+    color: #222222;
+    word-wrap: break-word;
+}
+
+.doc-description small
+{
+    font-size: 11px;
+    color:#990000;
+}
+
+
+footer
+{
+    bottom: 0px;
+    right: 0;
+    position: fixed;
+    background: transparent;
+}
