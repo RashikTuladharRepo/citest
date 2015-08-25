@@ -23,7 +23,7 @@ Class ControlUsers extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('users');
-        $this->db->where('username',$user);
+        $this->db->where('id',$user);
         $query=$this->db->get();
         if($query -> num_rows() == 1)
         {
@@ -33,6 +33,38 @@ Class ControlUsers extends CI_Model
         {
             $error = array("errorCode"=>"1", "msg"=>"No User Found", "username"=>"");
             return $error;
+        }
+    }
+
+
+    public function checkPassword($userid,$oldpassword,$newpassword)
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('id',$userid);
+        $this->db->where('password',$oldpassword);
+        $query=$this->db->get();
+
+        if($query-> num_rows() == 1)
+        {
+            return $this->updatePassword($userid,$newpassword);
+        }
+        else
+        {
+            $error = array("errorCode"=>"1", "msg"=>"Wrong Current Password");
+            return $error;
+        }
+    }
+
+    public function updatePassword($userId,$newpassword)
+    {
+        $data=array('password'=>$newpassword);
+        $this->db->where('id',$userId);
+        $query=$this->db->update('users', $data);
+        if($query)
+        {
+            $success = array("errorCode"=>"1", "msg"=>"Password Changes Successfully!");
+            return $success;
         }
     }
 }

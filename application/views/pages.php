@@ -53,13 +53,13 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <!-- menu prile quick info -->
-                <?php $this->load->view('adminLeftTopContents'); ?>
+                <?php $this->load->view('adminincludes/adminLeftTopContents'); ?>
                 <br/>
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                     <div class="menu_section">
-                        <?php $this->load->view('adminLeftNav'); ?>
+                        <?php $this->load->view('adminincludes/adminLeftNav'); ?>
                     </div>
                 </div>
                 <!-- /sidebar menu -->
@@ -76,7 +76,7 @@
                     </div>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <?php $this->load->view('adminRightTopContents'); ?>
+                        <?php $this->load->view('adminincludes/adminRightTopContents'); ?>
                     </ul>
                 </nav>
             </div>
@@ -114,7 +114,7 @@
 
 
             <!--footer content-->
-            <?php $this->load->view('adminFooter'); ?>
+            <?php $this->load->view('adminincludes/adminFooter'); ?>
             <!--footer content-->
 
         </div>

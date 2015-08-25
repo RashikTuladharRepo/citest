@@ -94,6 +94,13 @@
 }
 
 
+
+.user-profile-form
+{
+    width: 400px;
+    padding: 20px;
+}
+
 footer
 {
     bottom: 0px;

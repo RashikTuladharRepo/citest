@@ -25,7 +25,7 @@ class UserControl extends CI_Controller
     public function getProfile($user)
     {
         $data['user_records'] = $this->ControlUsers->getUserProfile($user);
-        $this->load->view('userprofile', $data);
+        $this->load->view('changepassword', $data);
     }
 
     public function updateProfile()
@@ -64,5 +64,17 @@ class UserControl extends CI_Controller
                 $this->load->view('userprofile',$data);
             }
         }
+    }
+
+
+
+    public function changePassword($userid)
+    {
+        $oldpassword=sha1($this->input->post('oldpassword'));
+        $newpassword=sha1($this->input->post('newpassword'));
+
+        $data['result']=$this->ControlUsers->checkPassword($userid,$oldpassword,$newpassword);
+
+        $this->load->view('changepassword',$data);
     }
 }
