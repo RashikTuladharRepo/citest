@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentallela Alela! | </title>
+    <title>Change Email! | </title>
 
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('styles/bootstrap.min.css'); ?>">
@@ -70,47 +70,45 @@
 
             <div class="row profile-section">
 
-                <h3>Change Password</h3>
+                <h3>Change Email</h3>
 
                 <div class="user-profile-section">
 
 
-                        <?php
-                            $err=validation_errors();
-                            if(isset($err))
-                            {
-                                if(strlen($err)>0)
-                                    echo "<div class=\"alert alert-error\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Warning!</strong>".validation_errors()."</div>";
-                            }
+                    <?php
+                    $err=validation_errors();
+                    if(isset($err))
+                    {
+                        if(strlen($err)>0)
+                            echo "<div class=\"alert alert-error\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Warning!</strong>".validation_errors()."</div>";
+                    }
 
-                            if (isset($result)) {
-
-                                $boxcolor = ($result['errorCode'] == 1 ? "alert-success" : "alert-error");
-                                echo "<div class=\"alert $boxcolor\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Warning!</strong>&nbsp;&nbsp;" . $result['msg'] . "</div>";
-                            }
-                        ?>
+                    if (isset($result)) {
+                        $boxcolor = ($result['errorCode'] == 1 ? "alert-success" : "alert-error");
+                        echo "<div class=\"alert $boxcolor\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Warning!</strong>&nbsp;&nbsp;" . $result['msg'] . "</div>";
+                    }
+                    ?>
 
                     <div class="row container">
                         <?php
                         $attributes = array('id' => 'changePassword', 'class' => 'user-profile-form');
                         $userid =  $this->uri->segment(3);
-                        echo form_open('UserControl/changePassword/'.$userid, $attributes);
+                        echo form_open('UserControl/changeEmail/'.$userid, $attributes);
                         ?>
                         <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-keyboard-o"></i></div>
-                            <input data-toggle="tooltip" title="Your Current Password" type="password"
-                                   class="form-control" name="oldpassword" id="oldpassword" placeholder="Your Current Password">
+                            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                            <input type="text" class="form-control" name="oldemail" id="oldemail" placeholder="Your Current Email">
                         </div>
-                        <div class="input-group" id="newpasswordf">
-                            <div class="input-group-addon"><i class="fa fa-keyboard-o"></i></div>
-                            <input data-toggle="tooltip" title="Your New Password" type="password" class="form-control" name="newpassword" id="newpassword" placeholder="Your New Password">
-                        </div>
-                        <div class="input-group">
-                            <div class="input-group-addon" id="repasswordf"><i class="fa fa-key"></i></div>
-                            <input data-toggle="tooltip" title="Confirm Your New Password" type="password" class="form-control" name="renewpassword" id="renewpassword" placeholder="Re-Enter New Password">
+                        <div class="input-group" id="newemailf">
+                            <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                            <input type="text" class="form-control" name="newemail" id="newemail" placeholder="Your New Email" value="<?php echo set_value('newemail'); ?>">
                         </div>
                         <div class="input-group">
-                            <button type="submit" id="changepassword" name="changepassword" class="btn btn-success">Change Password</button>
+                            <div class="input-group-addon" id="reemailf"><i class="fa fa-keyboard-o"></i></div>
+                            <input type="text" class="form-control" name="renewemail" id="renewemail" placeholder="Re-Enter New Email" value="<?php echo set_value('renewemail'); ?>">
+                        </div>
+                        <div class="input-group">
+                            <button type="submit" id="changeemail" name="changeemail" class="btn btn-success">Change Email</button>
                         </div>
                         <?php form_close(); ?>
                     </div>
@@ -140,41 +138,22 @@
 
             $(document).ready(function () {
 
-                $('input[type=password][name=oldpassword]').tooltip({
-                    placement: "right",
-                    trigger: "focus"
-                });
-
-                $('input[type=password][name=newpassword]').tooltip({
-                    placement: "right",
-                    trigger: "focus"
-                });
-
-                $('input[type=password][name=renewpassword]').tooltip({
-                    placement: "right",
-                    trigger: "focus"
-                });
-
-                $('#changepassword').attr('disabled','disabled');
-                $('#renewpassword').keyup(function(){
-                    var newpass=$('#newpassword').val();
-                    var repass=$('#renewpassword').val();
-                    if(newpass==repass)
+                $('#changeemail').attr('disabled','disabled');
+                $('#renewemail').keyup(function(){
+                    var newemail=$('#newemail').val();
+                    var reemail=$('#renewemail').val();
+                    if(newemail==reemail)
                     {
-                        $('#newpasswordf').removeClass('has-error');
-                        $('#newpasswordf').addClass('has-success');
-                        $('#changepassword').removeAttr('disabled');
+                        $('#newemailf').removeClass('has-error');
+                        $('#newemailf').addClass('has-success');
+                        $('#changeemail').removeAttr('disabled');
                     }
                     else
                     {
-                        $('#newpasswordf').addClass('has-error');
+                        $('#newemailf').addClass('has-error');
                     }
                 });
-
                 $('.alert').delay(3000).fadeOut();
-
-
-
 
             });
 

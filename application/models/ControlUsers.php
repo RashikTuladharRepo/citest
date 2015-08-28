@@ -13,7 +13,7 @@ Class ControlUsers extends CI_Model
         }
         else
         {
-            $error = array("errorCode"=>"1", "msg"=>"No Documents");
+            $error = array("errorCode"=>"1", "msg"=>"No Documents Available Right Now!");
             return $error;
         }
     }
@@ -31,12 +31,13 @@ Class ControlUsers extends CI_Model
         }
         else
         {
-            $error = array("errorCode"=>"1", "msg"=>"No User Found", "username"=>"");
+            $error = array("errorCode"=>"0", "msg"=>"No User Found", "username"=>"");
             return $error;
         }
     }
 
 
+//    change password
     public function checkPassword($userid,$oldpassword,$newpassword)
     {
         $this->db->select('*');
@@ -51,7 +52,7 @@ Class ControlUsers extends CI_Model
         }
         else
         {
-            $error = array("errorCode"=>"1", "msg"=>"Wrong Current Password");
+            $error = array("errorCode"=>"0", "msg"=>"Wrong Current Password");
             return $error;
         }
     }
@@ -64,6 +65,38 @@ Class ControlUsers extends CI_Model
         if($query)
         {
             $success = array("errorCode"=>"1", "msg"=>"Password Changes Successfully!");
+            return $success;
+        }
+    }
+
+//    change email
+
+    public function checkEmail($userid,$oldemail,$newemail)
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('id',$userid);
+        $this->db->where('email',$oldemail);
+        $query=$this->db->get();
+        if($query-> num_rows() == 1)
+        {
+            return $this->updateEmail($userid,$newemail);
+        }
+        else
+        {
+            $error = array("errorCode"=>"0", "msg"=>"Wrong Current Email");
+            return $error;
+        }
+    }
+
+    public function updateEmail($userid,$newemail)
+    {
+        $data=array('email'=>$newemail);
+        $this->db->where('id',$userid);
+        $query=$this->db->update('users', $data);
+        if($query)
+        {
+            $success = array("errorCode"=>"1", "msg"=>"Email Changes Successfully!");
             return $success;
         }
     }

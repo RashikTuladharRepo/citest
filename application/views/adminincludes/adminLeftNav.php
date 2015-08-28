@@ -13,19 +13,19 @@
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('UserControl/renderPage/C/Fundamentals_of_Computer_Programming') ?>">Fundamentals of Computer Programming</a>
+                <a href="<?php echo site_url('UserControl/renderPage/C/Fundamentals_of_Computer_Programming'); ?>">Fundamentals of Computer Programming</a>
             </li>
             <li>
-                <a href="#">Probability and Statistics</a>
+                <a href="<?php echo site_url('UserControl/renderPage/PS/Probability_And_Statistics'); ?>">Probability and Statistics</a>
             </li>
             <li>
-                <a href="#">Calculus and Analytical Geometry </a>
+                <a href="<?php echo site_url('UserControl/renderPage/CAG/Calculus_And_Analytical_Geometry'); ?>">Calculus and Analytical Geometry </a>
             </li>
             <li>
-                <a href="#">Physics I </a>
+                <a href="<?php echo site_url('UserControl/renderPage/PI/Physics_I'); ?>">Physics I </a>
             </li>
             <li>
-                <a href="#">Statistics I </a>
+                <a href="<?php echo site_url('UserControl/renderPage/SI/Statistics_I'); ?>">Statistics I </a>
             </li>
         </ul>
     </li>

@@ -3,6 +3,11 @@
     src: url('../fonts/DancingScript-Regular.otf');
 }
 
+.form-error
+{
+    padding: 10px;
+}
+
 .font16
 {
     font-size: 16px;
@@ -98,7 +103,7 @@
 .user-profile-form
 {
     width: 400px;
-    padding: 20px;
+    padding: 10px;
 }
 
 footer

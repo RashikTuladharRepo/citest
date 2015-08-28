@@ -31,11 +31,11 @@
                     showCancelButton: true,
                     confirmButtonColor: "#1E7145",
                     confirmButtonText: "Yes, Download!",
-                    cancelButtonColor:"#D14424",
+                    cancelButtonColor: "#D14424",
                     closeOnConfirm: true
                 },
                 function () {
-                        window.location.href = loc;
+                    window.location.href = loc;
                 });
         }
     </script>
@@ -91,25 +91,35 @@
             <div class="row notes-section">
 
                 <h3>
-                    <?php echo str_replace('_',' ',$this->session->userdata('subject')); ?>
+                    <?php echo str_replace('_', ' ', $this->session->userdata('subject')); ?>
                 </h3>
 
-                <?php foreach($records as $record) { $imagelocation='images/icon_'.$record->documentextension.'.png'; ?>
+                <?php
+                if (isset($records['errorCode'])) {
+                    echo "<div class=\"panel panel-info\">";
+                    echo "<div class=\"panel-heading\">Sorry!</div>";
+                    echo "<div class=\"panel-body\">No Notes Are Available Right Now. Our Team Is Working. <i class='fa fa-smile-o'></i></div>";
+                    echo "</div>";
+                } else {
+                    ?>
+                    <?php foreach ($records as $record) {
+                        $imagelocation = 'images/icon_' . $record->documentextension . '.png'; ?>
 
-                <div class="notes pull-left">
-                    <?php $a=base_url('uploads/'.$record->document);?>
-                    <a href="javascript:;" onclick="confirmbox('<?php echo $a ?>');">
-                        <div class="doc-description text-center">
-                            <?php echo $record->documentdescription;?>
+                        <div class="notes pull-left">
+                            <?php $a = base_url('uploads/' . $record->document); ?>
+                            <a href="javascript:;" onclick="confirmbox('<?php echo $a ?>');">
+                                <div class="doc-description text-center">
+                                    <?php echo $record->documentdescription; ?>
+                                </div>
+                                <div class="doc-type">
+                                    <img src="<?php echo base_url($imagelocation); ?>">
+                                </div>
+                                Created Date: 2015/12/15
+                            </a>
                         </div>
-                        <div class="doc-type">
-                            <img src="<?php echo base_url($imagelocation); ?>">
-                        </div>
-                        Created Date: 2015/12/15
-                    </a>
-                </div>
 
-                <?php } ?>
+                    <?php }
+                } ?>
             </div>
 
 
