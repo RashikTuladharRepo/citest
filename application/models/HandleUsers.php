@@ -26,9 +26,9 @@ Class HandleUsers extends CI_Model
     }
 
 
-    function userExists($username)
+    function userExists($email)
     {
-        $sql="select username from users where username='$username'";
+        $sql="select email from users where email='$email'";
         $query=$this->db->query($sql);
         if ($query->num_rows() > 0) {
             return $query->result();

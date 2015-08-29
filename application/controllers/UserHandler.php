@@ -112,24 +112,23 @@ class UserHandler extends CI_Controller{
             array(
                 'field'   => 'email',
                 'label'   => 'Email Address',
-                'rules'   => 'trim|required|min_length[10]|valid_email|xss_clean'
-            ),
-            array(
-                'field'   => 'username',
-                'label'   => 'Username',
-                'rules'   => 'trim|required|min_length[5]|max_length[12]|xss_clean|callback_checkUser'
-            ),
-            array(
-                'field'   => 'password',
-                'label'   => 'Password',
-                'rules'   => 'trim|required|matches[repassword]|sha1'
+                'rules'   => 'trim|required|min_length[10]|valid_email|xss_clean|callback_checkUser'
             )
-        ,
-            array(
-                'field'   => 'repassword',
-                'label'   => 'Password Confirmation',
-                'rules'   => 'trim|required'
-            )
+//            array(
+//                'field'   => 'username',
+//                'label'   => 'Username',
+//                'rules'   => 'trim|required|min_length[5]|max_length[12]|xss_clean|callback_checkUser'
+//            ),
+//            array(
+//                'field'   => 'password',
+//                'label'   => 'Password',
+//                'rules'   => 'trim|required|matches[repassword]|sha1'
+//            ),
+//            array(
+//                'field'   => 'repassword',
+//                'label'   => 'Password Confirmation',
+//                'rules'   => 'trim|required'
+//            )
             );
 
         $this->form_validation->set_rules($config);
@@ -139,34 +138,72 @@ class UserHandler extends CI_Controller{
         }
         else
         {
+            $password=$this->generateRandomString();
             $data = array(
                 'fullName' => $this->input->post('fName'),
                 'address' => $this->input->post('address'),
                 'college' => $this->input->post('college'),
                 'email' => $this->input->post('email'),
-                'username' => $this->input->post('username'),
-                'password' => $this->input->post('password')
+                'username' => $this->input->post('email'),
+                'password' => sha1($password),
+                'isActive' => 'Y',
+                'isDeleted' => 'N'
+
             );
-            $this->HandleUsers->signUpNewUser($data);
-            $data['message'] = 'Data Inserted Successfully';
-            $this->load->view('portal',$data);
+
+
+//email sending settings
+            $config = Array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'ssl://smtp.googlemail.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'uglyzfrens@gmail.com',
+                'smtp_pass' => '9841840193',
+                'smtp_timeout' => '4',
+                'mailtype'  => 'text',
+                'charset'   => 'iso-8859-1'
+            );
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+
+
+
+            $this->email->from('uglyzfrens@gmail.com', 'Rashik Tuladhar');
+            $this->email->to($data['email']);
+            $this->email->cc('');
+            $this->email->bcc('');
+            $this->email->subject('Email Test');
+            $this->email->message('Testing the email class. '.' '.$password);
+//          $this->email->send();
+
+            //echo $this->email->print_debugger();
+
+            if($this->email->send())
+            {
+                $this->HandleUsers->signUpNewUser($data);
+                $data['message'] = 'Data Inserted Successfully';
+                $this->load->view('portal', $data);
+            }
+            else
+            {
+                echo "not sent";
+            }
         }
     }
 
     function checkUser()
     {
-        $username = $this->input->post('username');
-        $result = $this->HandleUsers->userExists($username);
+        $email = $this->input->post('email');
+        $result = $this->HandleUsers->userExists($email);
         if($result)
         {
-            $this->form_validation->set_message('checkUser', 'User Name Not Available');
+            $this->form_validation->set_message('checkUser', 'The Email Has Already Been Registered!');
             return false;
         }
         else{
             return true;
         }
     }
-
 
     function generateRandomString($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

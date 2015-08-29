@@ -14,6 +14,6 @@
     </div>
     <div class="profile_info">
         <span>Welcome,</span>
-        <h2><?php echo ucfirst($this->session->userdata['logged_in']['username']); ?></h2>
+        <h2><?php echo ucfirst($this->session->userdata['logged_in']['fullname']); ?></h2>
     </div>
 </div>
