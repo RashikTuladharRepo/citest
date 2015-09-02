@@ -8,14 +8,28 @@ class UserControl extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ControlUsers', '', TRUE);
+//session check from the custom helper
         is_logged_in();
     }
 
+
+//redirections
+
+    //redirect to dashboard
     public function redirectDashboard()
     {
         $this->load->view('dashboard');
     }
 
+
+    //redirect to admin dashboard
+    public function redirectAdminDashboard()
+    {
+        $this->load->view('admin/index');
+    }
+
+
+    //load page according to the subject
     public function renderPage($subject, $subject_full)
     {
         $this->session->set_userdata('subject', $subject_full);
@@ -23,6 +37,8 @@ class UserControl extends CI_Controller
         $this->load->view('pages', $data);
     }
 
+
+    //update user profile
     public function updateProfile()
     {
         //This method will have the credentials validation
@@ -60,13 +76,63 @@ class UserControl extends CI_Controller
     }
 
 
+
+
+
 //change password
+
+    //change adminpassword
+    public function getProfileAdmin($user)
+    {
+        $data['user_records'] = $this->ControlUsers->getUserProfile($user);
+        $this->load->view('admin/changepassword', $data);
+    }
+    public function changePasswordAdmin($userid)
+    {
+        //This method will have the credentials validation
+        $this->load->library(array('form_validation'));
+        $this->load->helper('security');
+        $config = array(
+            array(
+                'field' => 'oldpassword',
+                'label' => 'Old Password',
+                'rules' => 'trim|required'
+            ),
+            array(
+                'field' => 'newpassword',
+                'label' => 'New Password',
+                'rules' => 'trim|required|matches[renewpassword]|min_length[5]'
+            ),
+            array(
+                'field' => 'renewpassword',
+                'label' => 'Confirmation Password',
+                'rules' => 'trim|required'
+            )
+        );
+
+        $this->form_validation->set_rules($config);
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('admin/changepassword');
+        }
+        else
+        {
+            $oldpassword = sha1($this->input->post('oldpassword'));
+            $newpassword = sha1($this->input->post('newpassword'));
+
+            $data['result'] = $this->ControlUsers->checkPassword($userid, $oldpassword, $newpassword);
+
+            $this->load->view('admin/changepassword', $data);
+        }
+    }
+
+
+    //change users password
     public function getProfile($user)
     {
         $data['user_records'] = $this->ControlUsers->getUserProfile($user);
         $this->load->view('changepassword', $data);
     }
-
     public function changePassword($userid)
     {
         //This method will have the credentials validation
@@ -112,7 +178,6 @@ class UserControl extends CI_Controller
     {
         $this->load->view('changeemail',$user);
     }
-
     public function changeEmail($userid)
     {
         $config = array(

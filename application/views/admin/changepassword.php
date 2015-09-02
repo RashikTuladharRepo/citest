@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>User | Change Password</title>
+    <title>Administrator | Change Password</title>
 
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('styles/bootstrap.min.css'); ?>">
@@ -39,7 +39,8 @@
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                     <div class="menu_section">
-                        <?php $this->load->view('adminincludes/adminLeftNav'); ?>
+                        <h3>Admin</h3>
+                        <?php $this->load->view('administratorincludes/adminnavigation'); ?>
                     </div>
                 </div>
                 <!-- /sidebar menu -->
@@ -56,7 +57,7 @@
                     </div>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <?php $this->load->view('adminincludes/adminRightTopContents'); ?>
+                        <?php $this->load->view('administratorincludes/adminRightTopContents'); ?>
                     </ul>
                 </nav>
             </div>
@@ -94,7 +95,7 @@
                         <?php
                         $attributes = array('id' => 'changePassword', 'class' => 'user-profile-form');
                         $userid =  $this->uri->segment(3);
-                        echo form_open('UserControl/changePassword/'.$userid, $attributes);
+                        echo form_open('UserControl/changePasswordAdmin/'.$userid, $attributes);
                         ?>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-keyboard-o"></i></div>

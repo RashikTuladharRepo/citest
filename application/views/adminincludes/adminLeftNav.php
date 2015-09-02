@@ -1,4 +1,3 @@
-<h3>Member</h3>
 <ul class="nav side-menu">
 
 

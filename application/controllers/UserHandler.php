@@ -9,6 +9,10 @@ class UserHandler extends CI_Controller{
         $this->load->model('HandleUsers','',TRUE);
     }
 
+
+//Login controls
+
+    //check user and redirect to particular page
     public function loginControl()
     {
         //This method will have the credentials validation
@@ -28,6 +32,7 @@ class UserHandler extends CI_Controller{
         }
     }
 
+
     public function check_database($password)
     {
         //Field validation succeeded.  Validate against database
@@ -35,7 +40,6 @@ class UserHandler extends CI_Controller{
 
         //query the database
         $result = $this->HandleUsers->login($username, $password);
-
         if ($result)
         {
             foreach($result as $row)
@@ -44,7 +48,8 @@ class UserHandler extends CI_Controller{
                     'id' => $row->id,
                     'username' => $row->username,
                     'fullname' => $row->fullName,
-                    'college'  => $row->college
+                    'college'  => $row->college,
+                    'role'     => $row->role
                 );
                 $this->session->set_userdata('logged_in', $sess_array);
             }
@@ -57,13 +62,25 @@ class UserHandler extends CI_Controller{
         }
     }
 
+
     public function redirectUsers()
     {
         if($this->session->userdata('logged_in'))
         {
+
             $session_data = $this->session->userdata('logged_in');
             $data['username'] = $session_data['username'];
-            $this->load->view('dashboard', $data);
+            if($session_data['role']=='admin')
+            {
+//                echo $session_data['role'];
+//                die();
+                $this->load->view('admin/index', $data);
+
+            }
+            else
+            {
+                $this->load->view('dashboard', $data);
+            }
         }
         else
         {
@@ -72,6 +89,7 @@ class UserHandler extends CI_Controller{
             redirect('Portal', 'refresh');
         }
     }
+
 
     function logout()
     {
@@ -87,6 +105,7 @@ class UserHandler extends CI_Controller{
     {
         $this->load->view('signup');
     }
+
 
     public function signUpUser(){
         //This method will have the credentials validation
@@ -191,6 +210,7 @@ class UserHandler extends CI_Controller{
         }
     }
 
+
     function checkUser()
     {
         $email = $this->input->post('email');
@@ -204,6 +224,7 @@ class UserHandler extends CI_Controller{
             return true;
         }
     }
+
 
     function generateRandomString($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
