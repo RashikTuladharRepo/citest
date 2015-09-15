@@ -53,6 +53,7 @@ class UserHandler extends CI_Controller{
                 );
                 $this->session->set_userdata('logged_in', $sess_array);
             }
+
             return TRUE;
         }
         else
@@ -225,6 +226,25 @@ class UserHandler extends CI_Controller{
         }
     }
 
+
+    public function availablity(){
+
+        $response=array('code'=>'0','msg'=>'Email already registered.');
+
+        echo json_encode($response);
+
+
+
+//        $email=$this->input->post('email');
+//        $return=$this->HandleUsers->availablityUser($email);
+//        $response=array();
+//        if($return=='true'){
+//            $response=array('code'=>'0','msg'=>'Email already registered.');
+//        }else{
+//            $response=array('code'=>'1','msg'=>'Email available for registration.');
+//        }
+//        echo json_encode($response);
+    }
 
     function generateRandomString($length = 10) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

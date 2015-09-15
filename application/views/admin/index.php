@@ -38,7 +38,7 @@
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                     <div class="menu_section">
-                            <h3>Admin</h3>
+                            <h3><?php echo ucwords($this->session->userdata['logged_in']['role']); ?></h3>
                             <?php $this->load->view('administratorincludes/adminnavigation'); ?>
                     </div>
                 </div>

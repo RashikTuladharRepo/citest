@@ -7,9 +7,9 @@
     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
         <li><a href="<?php echo site_url("UserControl/getEmailChange/".$this->session->userdata['logged_in']['id']); ?>"><i class="fa fa-envelope pull-right"></i> Change Email</a>
         </li>
-        <li><a href="<?php echo site_url("UserControl/getProfile/".$this->session->userdata['logged_in']['id']); ?>">  <i class="fa fa-key pull-right"></i> Change Password</a>
+        <li><a href="<?php echo site_url("Profile/".$this->session->userdata['logged_in']['id']); ?>">  <i class="fa fa-key pull-right"></i> Change Password</a>
         </li>
-        <li><a href="<?php echo site_url("UserHandler/logout"); ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+        <li><a href="<?php echo site_url("Logout"); ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
         </li>
     </ul>
 </li>

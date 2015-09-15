@@ -52,3 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'portal';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+//Administrator
+$route['Upload_Notes']='AdminController/uploadNotes';
+$route['Admin_Dashboard']='/UserControl/redirectAdminDashboard';
+//Client
+$route['Profile/(.*)']='UserControl/getProfile/$1';
+$route['Logout']='/UserHandler/logout';
+$route['Dashboard']='/UserControl/redirectDashboard';
+$route["Notes/(.*)/(.*)"] = 'UserControl/renderPage/$1/$2';

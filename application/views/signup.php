@@ -14,7 +14,11 @@
     <!--auto complete-->
     <script type="text/javascript" src="<?php echo base_url('scripts/jquery.autocomplete.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('scripts/colleges-autocomplete.js'); ?>"></script>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <!--auto complete-->
+
+
 
     <style type="text/css">
         .btn-primary {
@@ -196,6 +200,11 @@
 
 <script type="text/javascript">
 
+
+    $("#userImage").change(function () {
+        readURL(this);
+    });
+
     $(":file").filestyle({buttonName: "btn-primary"});
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -206,12 +215,32 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-    $("#userImage").change(function () {
-        readURL(this);
-    });
+
+
+
+
+
 
 </script>
-
+<script>
+    $(document).ready(function(){
+        $("#email").keyup(function(){
+            var valEmail=$("#email").val();
+            if(valEmail==""){
+                alert('hello');
+            }else{
+                $.ajax({
+                    type:"POST",
+                    url:"UserHandler/availablity",
+                    data:"email="+valEmail,
+                    success:function(response){
+                        alert(response);
+                    }
+                })
+            }
+        })
+    });
+</script>
 
 </body>
 </html>
@@ -236,40 +265,5 @@
 
 
 
-<!--                <br>-->
-<!--                <div class="input-group">-->
-<!--                    <div class="input-group-addon"><i class="fa fa-user"></i></div>-->
-<!--                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="--><?php //echo set_value('username'); ?><!--">-->
-<!--                </div>-->
-<!--                <br>-->
-<!--                <div class="input-group">-->
-<!--                    <div class="input-group-addon"><i class="fa fa-user-secret"></i></div>-->
-<!--                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">-->
-<!--                </div>-->
-<!--                <br>-->
-<!--                <div class="input-group">-->
-<!--                    <div class="input-group-addon"><i class="fa fa-user-secret"></i></div>-->
-<!--                    <input type="password" class="form-control" id="repassword" name="repassword"-->
-<!--                           placeholder="Confirm Password">-->
-<!--                </div>-->
-
-
-//    $("#username").keyup(function(){
-//        var username=$('#username').val();
-//        if(username!=" ")
-//        {
-//            $.ajax({
-//                url: "<?php //echo base_url(); ?>//"+"UserHandler/checkUserAjax",
-//                type: 'POST',
-//                data: {
-//                    user: username
-//                },
-//                dataType: 'json',
-//                success: function (data) {
-//                    alert(data);
-//                }
-//            });
-//        }
-//    });
 
 

@@ -37,5 +37,16 @@ Class HandleUsers extends CI_Model
             return false;
         }
     }
+
+    function availablityUser($email){
+        $sql="select email from users where email='$email'";
+        $query=$this->db->query($sql);
+        if ($query->num_rows() > 0) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
 ?>

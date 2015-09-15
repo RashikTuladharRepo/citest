@@ -1,10 +1,10 @@
 <ul class="nav side-menu">
 
 
-    <li><a href="<?php echo site_url('UserControl/redirectAdminDashboard') ?>"><i class="fa fa-home"></i> Dashboard </a></li>
+    <li><a href="<?php echo site_url('Admin_Dashboard') ?>"><i class="fa fa-home"></i> Dashboard </a></li>
 
 
-    <li><a href="<?php echo base_url('AdminController/uploadNotes') ?>"><i class="fa fa-file-o"></i>
+    <li><a href="<?php echo base_url('Upload_Notes') ?>"><i class="fa fa-file-o"></i>
             Upload Notes
         </a>
     </li>
